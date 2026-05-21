@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Emotional Field Theory — a unified mathematical framework for cognitive, social, and physical systems. Density shapes everything.">
+<meta property="og:title" content="Emotional Field Theory">
+<meta property="og:description" content="A unified mathematical framework. ΔIA = I·P − S">
+<meta property="og:url" content="https://emotionalfield.org">
+<meta name="twitter:card" content="summary_large_image">
+<title>Emotional Field Theory</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────── */
+:root {
+  --bg:        #0a0a0a;
+  --bg2:       #111111;
+  --bg3:       #1a1a1a;
+  --bg4:       #222222;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.13);
+  --text:      #f0ede8;
+  --text2:     #9a9890;
+  --text3:     #5a5855;
+  --formula:   #b8d4f0;
+  --formula2:  rgba(184,212,240,0.15);
+  --green:     #a8c8a0;
+  --sans:      'DM Sans', sans-serif;
+  --mono:      'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+}
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text2);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.nav-brand strong { color: var(--text); }
+.nav-links {
+  display: flex; gap: 36px; align-items: center;
+}
+.nav-links a {
+  font-size: 11px;
+  color: var(--text3);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text2); }
+.nav-cta {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  color: var(--formula) !important;
+  border: 1px solid rgba(184,212,240,0.25) !important;
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s !important;
+}
+.nav-cta:hover {
+  background: rgba(184,212,240,0.08) !important;
+  color: var(--formula) !important;
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot field background */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(184,212,240,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 70% at 70% 50%, black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 50%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-tag::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: var(--text3);
+}
+
+.hero-title {
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 200;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+.hero-title em {
+  font-style: normal;
+  color: var(--formula);
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 48px;
+}
+
+.hero-actions {
+  display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 400;
+  padding: 12px 24px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.03em;
+}
+.btn-primary:hover { background: var(--formula); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 11px 20px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+  letter-spacing: 0.05em;
+}
+.btn-secondary:hover { border-color: var(--text3); color: var(--text); }
+
+/* Hero equation panel */
+.hero-panel {
+  position: relative;
+}
+.eq-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 40px;
+  position: relative;
+}
+.eq-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 40px; right: 40px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--formula), transparent);
+}
+.eq-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.eq-main {
+  font-family: var(--mono);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  color: var(--formula);
+  letter-spacing: 0.02em;
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+.eq-legend {
+  display: grid; gap: 12px;
+}
+.eq-row {
+  display: flex; gap: 12px; align-items: baseline;
+}
+.eq-sym {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--formula);
+  min-width: 40px;
+  opacity: 0.8;
+}
+.eq-def {
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.5;
+}
+.eq-def strong { color: var(--text2); font-weight: 300; }
+
+/* density dots visual */
+.density-row {
+  display: flex; gap: 5px; margin-top: 32px; align-items: center;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--formula);
+  transition: opacity 0.3s;
+}
+.dot.dim { opacity: 0.15; }
+.dot.mid { opacity: 0.45; }
+.density-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  margin-left: 10px;
+  letter-spacing: 0.1em;
+}
+
+/* ─────────────────────────────────────────
+   SECTION COMMON
+───────────────────────────────────────── */
+.section {
+  padding: 100px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-full {
+  padding: 100px 48px;
+  border-top: 1px solid var(--border);
+}
+.section-full .section-inner {
+  max-width: 1100px; margin: 0 auto;
+}
+
+.section-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-tag::before {
+  content: '';
+  display: inline-block;
+  width: 16px; height: 1px; background: var(--text3);
+}
+.section-title {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 200;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.section-title em {
+  font-style: normal;
+  color: var(--formula);
+}
+.section-body {
+  font-size: 16px;
+  color: var(--text2);
+  max-width: 600px;
+  line-height: 1.75;
+}
+
+/* ─────────────────────────────────────────
+   CORE INSIGHT / WHY
+───────────────────────────────────────── */
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 60px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.why-cell {
+  background: var(--bg2);
+  padding: 36px 32px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.why-cell:hover { background: var(--bg3); }
+.why-cell:nth-child(2n) { border-right: none; }
+.why-cell:nth-last-child(-n+2) { border-bottom: none; }
+
+.why-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+}
+.why-head {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.why-body {
+  font-size: 14px;
+  color: var(--text3);
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────
+   FRAMEWORK LAYERS
+───────────────────────────────────────── */
+.layers-full {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.layers-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 100px 48px;
+  display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: start;
+}
+.layer-stack {
+  display: flex; flex-direction: column; gap: 2px;
+  margin-top: 40px;
+}
+.layer {
+  display: flex; gap: 20px; align-items: center;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  position: relative;
+  cursor: default;
+  transition: border-color 0.2s, background 0.2s;
+}
+.layer:hover { border-color: var(--border2); background: rgba(255,255,255,0.02); }
+.layer-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--bg4);
+  border: 1px solid var(--border2);
+  flex-shrink: 0;
+}
+.layer.active .layer-dot { background: var(--formula); border-color: var(--formula); }
+.layer-id {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--text3); letter-spacing: 0.1em;
+  min-width: 60px;
+}
+.layer-name {
+  font-size: 13px; color: var(--text2);
+  font-weight: 300;
+}
+.layer.active .layer-name { color: var(--text); }
+
+.modules-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px;
+}
+.module-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px;
+  transition: border-color 0.2s;
+  text-decoration: none;
+  display: block;
+}
+.module-card:hover { border-color: rgba(184,212,240,0.2); }
+.module-id {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--formula); letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.module-name {
+  font-size: 14px; color: var(--text); font-weight: 300;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.module-desc {
+  font-size: 12px; color: var(--text3); line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────
+   APPLICATIONS
+───────────────────────────────────────── */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 60px;
+}
+.app-card {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 32px 28px;
+  background: var(--bg2);
+  transition: border-color 0.25s;
+}
+.app-card:hover { border-color: rgba(184,212,240,0.2); }
+.app-icon {
+  font-family: var(--mono);
+  font-size: 22px;
+  color: var(--formula);
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+.app-title {
+  font-size: 16px; font-weight: 300;
+  color: var(--text); margin-bottom: 10px;
+}
+.app-body {
+  font-size: 13px; color: var(--text3); line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────
+   RESEARCH / PUBLICATIONS
+───────────────────────────────────────── */
+.pub-list {
+  display: flex; flex-direction: column; gap: 2px;
+  margin-top: 48px;
+}
+.pub-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 24px; align-items: center;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--bg2);
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+.pub-row:hover {
+  background: var(--bg3);
+  border-color: var(--border2);
+}
+.pub-id {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--text3); letter-spacing: 0.1em;
+}
+.pub-name { font-size: 14px; color: var(--text); font-weight: 300; }
+.pub-doi {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--formula); opacity: 0.6;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────
+   JOIN / CTA SECTION
+───────────────────────────────────────── */
+.join-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+.join-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 100px 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.join-title {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 200;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: var(--text);
+}
+.join-title em { font-style: normal; color: var(--formula); }
+.join-body {
+  font-size: 15px; color: var(--text2);
+  line-height: 1.75; margin-top: 20px;
+}
+.join-cards {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.join-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.join-card:hover { border-color: rgba(184,212,240,0.2); background: var(--bg3); }
+.join-card-icon {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--formula);
+  opacity: 0.6;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+.join-card-text {}
+.join-card-platform {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--text3); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.join-card-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 48px;
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 32px;
+}
+.footer-brand {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text3);
+}
+.footer-brand strong { color: var(--text2); display: block; margin-bottom: 6px; }
+.footer-links {
+  display: flex; gap: 28px; flex-wrap: wrap;
+}
+.footer-links a {
+  font-size: 12px; color: var(--text3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text2); }
+.footer-legal {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--text3); letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+
+/* ─────────────────────────────────────────
+   SCROLLING TICKER
+───────────────────────────────────────── */
+.ticker-wrap {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  padding: 14px 0;
+  background: var(--bg2);
+}
+.ticker-track {
+  display: flex; gap: 60px;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.ticker-item {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.ticker-item span { color: var(--formula); margin-right: 60px; }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────────────────
+   FADE IN ANIMATIONS
+───────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 860px) {
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .section { padding: 72px 24px; }
+  .section-full { padding: 72px 24px; }
+  .layers-inner { grid-template-columns: 1fr; gap: 48px; padding: 72px 24px; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .apps-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-cell:nth-child(2n) { border-right: 1px solid var(--border); }
+  .join-inner { grid-template-columns: 1fr; gap: 48px; padding: 72px 24px; }
+  .footer { padding: 40px 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .pub-row { grid-template-columns: 1fr; gap: 8px; }
+  .pub-doi { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <a href="#" class="nav-brand"><strong>∂ρ</strong> Emotional Field</a>
+  <div class="nav-links">
+    <a href="#theory">Theory</a>
+    <a href="#framework">Framework</a>
+    <a href="#applications">Applications</a>
+    <a href="#research">Research</a>
+    <a href="https://t.me/emotionalfield" target="_blank" rel="noopener" class="nav-cta">→ Telegram</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Emotional Field Theory · 2026</div>
+      <h1 class="hero-title">
+        Density<br>shapes<br><em>everything.</em>
+      </h1>
+      <p class="hero-sub">
+        A unified mathematical framework describing cognitive, social, and physical systems as informational objects governed by a single dynamic law.
+      </p>
+      <div class="hero-actions">
+        <a href="https://t.me/emotionalfield" target="_blank" rel="noopener" class="btn-primary">
+          Join the channel
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.19924326" target="_blank" rel="noopener" class="btn-secondary">
+          Read the theory ↗
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-panel fade-up">
+      <div class="eq-card">
+        <div class="eq-label">Core dynamic law</div>
+        <div class="eq-main">ΔIA = I·P − S</div>
+        <div class="eq-legend">
+          <div class="eq-row">
+            <span class="eq-sym">ΔIA</span>
+            <span class="eq-def"><strong>Change in informational density</strong> — compression or expansion of the agent's distinguishability field</span>
+          </div>
+          <div class="eq-row">
+            <span class="eq-sym">I·P</span>
+            <span class="eq-def"><strong>Incoming flow × conductance</strong> — what enters and how freely it passes</span>
+          </div>
+          <div class="eq-row">
+            <span class="eq-sym">S</span>
+            <span class="eq-def"><strong>Structural resistance</strong> — accumulated density blocking new patterns</span>
+          </div>
+        </div>
+        <div class="density-row">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot mid"></div>
+          <div class="dot dim"></div>
+          <div class="dot dim"></div>
+          <div class="dot dim"></div>
+          <div class="dot dim"></div>
+          <div class="dot dim"></div>
+          <span class="density-label">ρ → low conductance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Distinguishability space <span>Σ</span></span>
+    <span class="ticker-item">Informational density <span>ρ</span></span>
+    <span class="ticker-item">Distinction quantum <span>Q</span></span>
+    <span class="ticker-item">Conductance <span>P</span></span>
+    <span class="ticker-item">Resistance <span>S</span></span>
+    <span class="ticker-item">O₀ operator <span>repetition</span></span>
+    <span class="ticker-item">O₁ operator <span>new distinction</span></span>
+    <span class="ticker-item">∂ρ/∂t <span>emotion as derivative</span></span>
+    <span class="ticker-item">Density trap <span>paralysis</span></span>
+    <span class="ticker-item">Distinguishability space <span>Σ</span></span>
+    <span class="ticker-item">Informational density <span>ρ</span></span>
+    <span class="ticker-item">Distinction quantum <span>Q</span></span>
+    <span class="ticker-item">Conductance <span>P</span></span>
+    <span class="ticker-item">Resistance <span>S</span></span>
+    <span class="ticker-item">O₀ operator <span>repetition</span></span>
+    <span class="ticker-item">O₁ operator <span>new distinction</span></span>
+    <span class="ticker-item">∂ρ/∂t <span>emotion as derivative</span></span>
+    <span class="ticker-item">Density trap <span>paralysis</span></span>
+  </div>
+</div>
+
+<!-- ─── THEORY CORE ─── -->
+<section class="section fade-up" id="theory">
+  <div class="section-tag">Core idea</div>
+  <h2 class="section-title">Reality is an<br><em>informational field.</em></h2>
+  <p class="section-body">
+    Every system — cognitive, social, physical — can be described as a distinguishability field Σ with a density ρ. The fundamental question is not "what is happening" but "how is density changing."
+  </p>
+
+  <div class="why-grid" style="margin-top: 60px;">
+    <div class="why-cell">
+      <div class="why-num">01</div>
+      <div class="why-head">Emotion is ∂ρ/∂t</div>
+      <div class="why-body">Emotion is not a label. It is the registered experience of your field compressing or expanding — the sign and magnitude of density change over time.</div>
+    </div>
+    <div class="why-cell">
+      <div class="why-num">02</div>
+      <div class="why-head">Attention is conductance</div>
+      <div class="why-body">The attention economy has mistaken capture for influence. What matters is not whether information arrives — but whether it passes through at all.</div>
+    </div>
+    <div class="why-cell">
+      <div class="why-num">03</div>
+      <div class="why-head">Repetition builds resistance</div>
+      <div class="why-body">Every repeated pattern that arrives before value is experienced adds structural resistance S. This is why the same message stops working — the structure is blocked, not the message.</div>
+    </div>
+    <div class="why-cell">
+      <div class="why-num">04</div>
+      <div class="why-head">One formalism, all scales</div>
+      <div class="why-body">The same operators O₀ (repeat) and O₁ (new distinction) govern individual cognition, social systems, and physical field dynamics. The language is unified.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FRAMEWORK ─── -->
+<div class="layers-full" id="framework">
+  <div class="layers-inner">
+    <div>
+      <div class="section-tag">Architecture</div>
+      <h2 class="section-title">A layered<br><em>formal system.</em></h2>
+      <p class="section-body" style="margin-top: 16px;">
+        EF Theory is built in explicit dependency layers — from primitive axioms to applied modules. Each layer is formally compatible with those above and below it.
+      </p>
+
+      <div class="layer-stack">
+        <div class="layer">
+          <div class="layer-dot"></div>
+          <span class="layer-id">CORE v2</span>
+          <span class="layer-name">Primitive definitions · Axioms · Operators</span>
+        </div>
+        <div class="layer">
+          <div class="layer-dot"></div>
+          <span class="layer-id">MATH v2</span>
+          <span class="layer-name">Mathematical foundations</span>
+        </div>
+        <div class="layer">
+          <div class="layer-dot"></div>
+          <span class="layer-id">TOPO v1</span>
+          <span class="layer-name">Topological foundations</span>
+        </div>
+        <div class="layer">
+          <div class="layer-dot"></div>
+          <span class="layer-id">DYN v1</span>
+          <span class="layer-name">Dynamical systems · Attractors · Loops</span>
+        </div>
+        <div class="layer active">
+          <div class="layer-dot"></div>
+          <span class="layer-id">APPLIED</span>
+          <span class="layer-name">Domain modules — active research</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-tag" style="margin-top: 0;">Active modules</div>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-id">C1 · Emotion Dynamics</div>
+          <div class="module-name">Emotion as density derivative</div>
+          <div class="module-desc">Formal account of emotional states, transitions, and recovery trajectories in terms of ∂ρ/∂t.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-id">C2 · Informational Paralysis</div>
+          <div class="module-name">Density traps and stasis</div>
+          <div class="module-desc">When high-ρ systems lose conductance. Structural model of cognitive and social paralysis.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-id">C3 · Relational Fields</div>
+          <div class="module-name">Coupled agents and dyadic dynamics</div>
+          <div class="module-desc">Density transfer between agents. Formal account of attachment, synchrony, and relational resistance.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-id">ATT · Attention Conductance</div>
+          <div class="module-name">Attention propagation in media systems</div>
+          <div class="module-desc">Structural model for influence, media strategy, and informational conductance at scale.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── APPLICATIONS ─── -->
+<section class="section-full fade-up" id="applications">
+  <div class="section-inner">
+    <div class="section-tag">Applications</div>
+    <h2 class="section-title">Where EF<br><em>applies.</em></h2>
+    <p class="section-body">
+      The formal layer is one. The application domains are many. Each uses the same operators, the same density logic, the same resistance model.
+    </p>
+    <div class="apps-grid">
+      <div class="app-card">
+        <div class="app-icon">ρ</div>
+        <div class="app-title">Individual psychology</div>
+        <div class="app-body">Emotional regulation, cognitive load, attention fatigue, recovery from paralysis — all described as density trajectories in a distinguishability field.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">∂</div>
+        <div class="app-title">Relational dynamics</div>
+        <div class="app-body">Attachment, co-regulation, conflict, boundary dynamics — modelled as coupled fields with mutual density transfer and resistance profiles.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">Σ</div>
+        <div class="app-title">Social systems</div>
+        <div class="app-body">Norms, power structures, institutional resistance, and collective behaviour as population-level density dynamics with shared distinguishability spaces.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">P</div>
+        <div class="app-title">Media and influence</div>
+        <div class="app-body">Attention is conductance, not capture. The EF Attention Conductance Framework provides a structural model for communication strategy at scale.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">O₁</div>
+        <div class="app-title">Learning and development</div>
+        <div class="app-body">Perceptual development, skill acquisition, and transformative learning as transitions from low-conductance high-density states to expanded field topology.</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">S</div>
+        <div class="app-title">Organisational design</div>
+        <div class="app-body">Why structures resist change. How to reduce systemic resistance S without collapsing the field. A formal diagnostic for institutional density traps.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESEARCH ─── -->
+<section class="section fade-up" id="research">
+  <div class="section-tag">Publications</div>
+  <h2 class="section-title">Open research<br><em>on Zenodo.</em></h2>
+  <p class="section-body">
+    All EF Theory documents are published under CC BY-NC-ND 4.0 and indexed with DOIs. The full corpus is available for scholarly review.
+  </p>
+
+  <div class="pub-list">
+    <a href="https://doi.org/10.5281/zenodo.19924326" target="_blank" rel="noopener" class="pub-row">
+      <span class="pub-id">CORPUS v2</span>
+      <span class="pub-name">EF Theory Corpus — Core, Axioms, Math, Definitions, Practice, Social, Physical Bridge</span>
+      <span class="pub-doi">10.5281/zenodo.19924326</span>
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.19984531" target="_blank" rel="noopener" class="pub-row">
+      <span class="pub-id">ATT v1</span>
+      <span class="pub-name">EF Attention Conductance Framework</span>
+      <span class="pub-doi">10.5281/zenodo.19984531</span>
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.20228119" target="_blank" rel="noopener" class="pub-row">
+      <span class="pub-id">C1 v1</span>
+      <span class="pub-name">EF-Emotion Dynamics — Density-Based Account of Emotional States</span>
+      <span class="pub-doi">10.5281/zenodo.20228119</span>
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.20233108" target="_blank" rel="noopener" class="pub-row">
+      <span class="pub-id">C2 v1</span>
+      <span class="pub-name">EF-Informational Paralysis</span>
+      <span class="pub-doi">10.5281/zenodo.20233108</span>
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.20234594" target="_blank" rel="noopener" class="pub-row">
+      <span class="pub-id">C3 v1</span>
+      <span class="pub-name">EF-Relational Fields — Coupled Agents and Dyadic Field Dynamics</span>
+      <span class="pub-doi">10.5281/zenodo.20234594</span>
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.20117981" target="_blank" rel="noopener" class="pub-row">
+      <span class="pub-id">TOPO v1</span>
+      <span class="pub-name">EF-Topological Foundations</span>
+      <span class="pub-doi">10.5281/zenodo.20117981</span>
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.20123801" target="_blank" rel="noopener" class="pub-row">
+      <span class="pub-id">DYN v1</span>
+      <span class="pub-name">EF-Dynamical Systems — Attractors, Loops, Regime Transitions</span>
+      <span class="pub-doi">10.5281/zenodo.20123801</span>
+    </a>
+  </div>
+
+  <div style="margin-top: 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+    <span style="font-family: var(--mono); font-size: 11px; color: var(--text3);">Elena Pavlova · Independent Researcher · Tashkent, Uzbekistan</span>
+    <a href="https://orcid.org/0009-0008-0372-166X" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 11px; color: var(--formula); opacity: 0.7; text-decoration: none;">ORCID 0009-0008-0372-166X ↗</a>
+  </div>
+</section>
+
+<!-- ─── JOIN / CTA ─── -->
+<div class="join-section">
+  <div class="join-inner">
+    <div>
+      <h2 class="join-title">Follow the<br><em>research.</em></h2>
+      <p class="join-body">
+        New modules, applied tools, and educational materials are released through the Telegram channel. Research discussions, B2B collaborations, and institutional inquiries via LinkedIn.
+      </p>
+    </div>
+    <div class="join-cards">
+      <a href="https://t.me/emotionalfield" target="_blank" rel="noopener" class="join-card">
+        <span class="join-card-icon">→</span>
+        <div class="join-card-text">
+          <div class="join-card-platform">Telegram</div>
+          <div class="join-card-desc">New modules · educational releases · community · main hub</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/elena-pavlova-238922407" target="_blank" rel="noopener" class="join-card">
+        <span class="join-card-icon">in</span>
+        <div class="join-card-text">
+          <div class="join-card-platform">LinkedIn</div>
+          <div class="join-card-desc">B2B · institutional collaborations · research partnerships</div>
+        </div>
+      </a>
+      <a href="mailto:emotionalfield.lab@gmail.com" class="join-card">
+        <span class="join-card-icon">@</span>
+        <div class="join-card-text">
+          <div class="join-card-platform">Email</div>
+          <div class="join-card-desc">emotionalfield.lab@gmail.com · direct inquiries</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>∂ρ · Emotional Field Theory</strong>
+      Elena Pavlova · Independent Researcher · Tashkent
+    </div>
+    <div class="footer-links">
+      <a href="https://doi.org/10.5281/zenodo.19924326" target="_blank" rel="noopener">Zenodo corpus</a>
+      <a href="https://t.me/emotionalfield" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://www.linkedin.com/in/elena-pavlova-238922407" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:emotionalfield.lab@gmail.com">Contact</a>
+    </div>
+    <div class="footer-legal">
+      © 2026 Elena Pavlova · CC BY-NC-ND 4.0<br>
+      emotionalfield.org · emotionalfield.com
+    </div>
+  </div>
+</footer>
+
+<script>
+// Fade-up on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Animate density dots in hero on load
+window.addEventListener('load', () => {
+  const dots = document.querySelectorAll('.density-row .dot');
+  dots.forEach((dot, i) => {
+    setTimeout(() => {
+      dot.style.transition = 'opacity 0.4s ease';
+    }, i * 80);
+  });
+});
+</script>
+
+</body>
+</html>
